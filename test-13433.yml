@@ -1,0 +1,14 @@
+- hosts: localhost
+  tags:
+    - job
+  tasks:
+    - name: Schedule a new job
+      dci_job:
+        topic: 'OSP13'
+    - name: Test pour 13433
+      command: touch /tmp/a
+    - name: Update the motd
+      command: sed -i 's,a,b,' /etc/motd
+      become: True
+    - fail:
+        msg: bob
